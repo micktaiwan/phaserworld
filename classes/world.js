@@ -7,7 +7,7 @@ export class World {
     const config = {
       type: Phaser.AUTO,
       parent: 'world',
-      height: $(window).innerHeight(),
+      height: $(window).innerHeight() - 500,
       width: $(window).innerWidth(),
       pixelArt: true,
       physics: {

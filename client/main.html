@@ -4,6 +4,35 @@
 
 <body>
 
+{{>titleEditor}}
+
+<div id="tiles">
+  Tiles
+</div>
 <div id="world"></div>
 
 </body>
+
+<template name="titleEditor">
+
+  <div id="editor">
+    <div class="content">
+      <div class="row">
+        <div class="col-sm">
+          <div class="colors">colors</div>
+
+        </div>
+        <div class="col-sm">
+          <div class="pixels">pixels</div>
+        </div>
+      </div>
+      result
+      <div class="result"></div>
+      <div class="buttons">
+        <input class="form-control" placeholder="Name">
+        <button class="btn btn-primary">Save</button>
+      </div>
+    </div>
+  </div>
+
+</template>

@@ -1,0 +1,49 @@
+html, body {
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  font-family: sans-serif;
+}
+
+#tiles {
+  background: #fff;
+  width: 100%;
+  height: 34px;
+  border: 1px black solid;
+}
+
+#editor {
+  background: #aaa;
+  position: fixed;
+  width: 500px;
+  height: 500px;
+  top: calc(~'50% - 250px');
+  left: calc(~'50% - 250px');
+  border: 1px black solid;
+  .content {
+    position: relative;
+    .colors {
+      margin: 10px;
+      background: #fff;
+      border: 1px black solid;
+    }
+    .pixels {
+      margin: 10px;
+      background: #fff;
+      border: 1px black solid;
+      width: 320px;
+      height: 320px;
+    }
+    .result {
+      margin: 10px;
+      background: #fff;
+      width: 64px;
+      height: 64px;
+    }
+    .buttons {
+      padding: 10px;
+      background:#777;
+      width: 100%;
+    }
+  }
+}
