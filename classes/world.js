@@ -35,8 +35,9 @@ class Scene extends Phaser.Scene {
     this.frameRate = Math.ceil(this.speed / 20);
   }
 
-  putTile(fileId) {
-    this.add.image(10, 10, fileId);
+  putTile(x, y, fileId) {
+    console.log('putTile', fileId);
+    this.add.image(x, y, fileId).setOrigin(0, 0);
   }
 
   preload() {

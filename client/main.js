@@ -98,6 +98,25 @@ Template.world.events({
     $(e.currentTarget).removeClass('dragover');
     const fileId = e.originalEvent.dataTransfer.getData("text");
     world.scene.scenes[0].putTile(fileId);
+    console.log(world);
+    console.log(e);
+    const canvasPos = $('#world canvas').position();
+    const tileSize = 16;
+    const x = Math.floor(((e.clientX - canvasPos.left) / world.scene.scenes[0].zoom) / tileSize) * tileSize;
+    const y = Math.floor(((e.clientY - canvasPos.top) / world.scene.scenes[0].zoom) / tileSize) * tileSize;
+    console.log(canvasPos);
+    // console.log(world.scene.scenes[0].mouse.manager.activePointer.position.x, world.scene.scenes[0].mouse.manager.activePointer.position.y);
+    //
+    // const diffX = world.scene.scenes[0].mouse.manager.activePointer.position.x / world.scene.scenes[0].zoom - world.scene.scenes[0].player.body.position.x;
+    // const diffY = world.scene.scenes[0].mouse.manager.activePointer.position.y / world.scene.scenes[0].zoom - world.scene.scenes[0].player.body.position.y;
+    //
+    // console.log(diffX, diffY);
+    // const x = Math.floor(world.scene.scenes[0].mouse.manager.activePointer.position.x / 32) * 32;
+    // const y = Math.floor(world.scene.scenes[0].mouse.manager.activePointer.position.y / 32) * 32;
+    // const x = world.scene.scenes[0].mouse.manager.activePointer.position.x;
+    // const y = world.scene.scenes[0].mouse.manager.activePointer.position.y;
+    console.log(x, y);
+    world.scene.scenes[0].putTile(x, y, fileId);
   },
 
 });
