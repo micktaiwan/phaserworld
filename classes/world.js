@@ -56,7 +56,14 @@ class Scene extends Phaser.Scene {
 
   create() {
     console.log('create');
+
+    this.keyZ = this.input.keyboard.addKey('Z');
+    this.keyQ = this.input.keyboard.addKey('Q');
+    this.keyS = this.input.keyboard.addKey('S');
+    this.keyD = this.input.keyboard.addKey('D');
+
     this.cursors = this.input.keyboard.createCursorKeys();
+
     this.mouse = this.input.mouse;
     // console.log(this.cursors, this.mouse);
 
@@ -104,24 +111,25 @@ class Scene extends Phaser.Scene {
   }
 
   update() {
+    // Phaser.Input.Keyboard.KeyCodes
     if(this.cursors.shift.isDown) this.setSpeed(300);
     else this.setSpeed(100);
-    if(this.cursors.left.isDown) {
+    if(this.cursors.left.isDown || this.keyQ.isDown) {
       this.player.setVelocityX(-this.speed);
       this.player.setVelocityY(0);
       this.player.anims.play('left', true);
     }
-    else if(this.cursors.right.isDown) {
+    else if(this.cursors.right.isDown || this.keyD.isDown) {
       this.player.setVelocityX(this.speed);
       this.player.setVelocityY(0);
       this.player.anims.play('right', true);
     }
-    else if(this.cursors.up.isDown) {
+    else if(this.cursors.up.isDown || this.keyZ.isDown) {
       this.player.setVelocityY(-this.speed);
       this.player.setVelocityX(0);
       this.player.anims.play('up', true);
     }
-    else if(this.cursors.down.isDown) {
+    else if(this.cursors.down.isDown || this.keyS.isDown) {
       this.player.setVelocityY(this.speed);
       this.player.setVelocityX(0);
       this.player.anims.play('down', true);
