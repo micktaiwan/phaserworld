@@ -78,8 +78,8 @@ export class TileEditor {
     const width = 32;
     const height = 32;
 
-    var width_source = canvas.width;
-    var height_source = canvas.height;
+    var width_source = canvas.width * 2;
+    var height_source = canvas.height * 2;
 
     var ratio_w = width_source / width;
     var ratio_h = height_source / height;

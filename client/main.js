@@ -97,7 +97,6 @@ Template.world.events({
   'drop #world': function(e) {
     $(e.currentTarget).removeClass('dragover');
     const fileId = e.originalEvent.dataTransfer.getData("text");
-    console.log(world);
     world.scene.scenes[0].putTile(fileId);
   },
 

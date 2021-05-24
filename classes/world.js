@@ -36,22 +36,22 @@ class Scene extends Phaser.Scene {
   }
 
   putTile(fileId) {
-    console.log('putTile', fileId);
     this.add.image(10, 10, fileId);
   }
 
   preload() {
     console.log('preload');
     this.load.spritesheet('player', 'img/perso1.png', {frameWidth: 16, frameHeight: 32});
-
-    const files = Files.find().each();
-    console.log(files);
     const self = this;
-    _.each(files, f => {
-      console.log(f.link());
-      self.load.image(f._id, f.link());
-    });
 
+    // FIXME: ça marche pas, il faut absoluement que ça soit chargé avant que la scene start (essayer de restart la scene ?)
+    Files.find().observe({
+      added(f) {
+        const file = Files.findOne(f._id);
+        console.log(f.name, file.link());
+        self.load.image(f._id, file.link());
+      },
+    });
   }
 
   create() {
