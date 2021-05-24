@@ -1,17 +1,17 @@
+import {Files} from "../imports/api/tiles/collections.js";
+
 require('phaser');
 
 export class World extends Phaser.Game {
 
   constructor(config) {
     super(config);
-    this.scene.add('Scene', new Scene(), true);
-    // this.scene.start('Scene')
+    this.scene.add('Scene', new Scene(), false);
     console.log('world constructed');
-
   }
 
-  putTile() {
-    console.log('putTile', this.scene.scenes[0]);
+  startScene() {
+    this.scene.start('Scene');
   }
 
 }
@@ -35,9 +35,23 @@ class Scene extends Phaser.Scene {
     this.frameRate = Math.ceil(this.speed / 20);
   }
 
+  putTile(fileId) {
+    console.log('putTile', fileId);
+    this.add.image(10, 10, fileId);
+  }
+
   preload() {
     console.log('preload');
     this.load.spritesheet('player', 'img/perso1.png', {frameWidth: 16, frameHeight: 32});
+
+    const files = Files.find().each();
+    console.log(files);
+    const self = this;
+    _.each(files, f => {
+      console.log(f.link());
+      self.load.image(f._id, f.link());
+    });
+
   }
 
   create() {
@@ -94,12 +108,6 @@ class Scene extends Phaser.Scene {
       frameRate: this.frameRate,
       repeat: -1,
     });
-    // this.anims.create({
-    //   key: 'still',
-    //   frames: [{key: 'player', frame: 18}],
-    //   frameRate: 0,
-    // });
-
   }
 
   update() {

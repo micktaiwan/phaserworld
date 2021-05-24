@@ -53,7 +53,7 @@
   <div id="tiles">
     <b class="lead">{{count files}} tiles</b><br>
     {{#each files}}
-      <img class="tile" src="{{link}}" width="64" height="64" draggable="true">
+      <img id="{{_id}}" class="tile" src="{{link}}" width="64" height="64" draggable="true">
     {{/each}}
   </div>
 
