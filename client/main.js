@@ -10,7 +10,7 @@ import {World} from '../classes/world.js';
 import {TileEditor} from "../classes/tileEditor.js";
 import {Files} from "../imports/api/tiles/collections.js";
 
-const world = new World();
+let world;
 const tileEditor = new TileEditor();
 
 //import {ReactiveVar} from "meteor/reactive-var";
@@ -31,6 +31,19 @@ Template.titleEditor.onCreated(function() {
 
 Template.titleEditor.onRendered(function() {
 
+  const config = {
+    type: Phaser.AUTO,
+    parent: 'world',
+    width: $('#world').innerWidth(),
+    height: $('#world').innerHeight(),
+    pixelArt: true,
+  };
+
+  this.game = new Phaser.Game(config);
+
+  console.log('world constructed');
+
+  world = new World(config);
   tileEditor.setCanvasId("canvas", "result");
 
 });
@@ -63,12 +76,30 @@ Template.tiles.helpers({
 
 });
 
+Template.world.events({
+
+  'dragover #world': function(e) {
+    e.preventDefault();
+    $(e.currentTarget).addClass('dragover');
+  },
+
+  'dragleave #world': function(e) {
+    e.preventDefault();
+    $(e.currentTarget).removeClass('dragover');
+  },
+
+  'drop #world': function(e) {
+    $(e.currentTarget).removeClass('dragover');
+    world.putTile();
+  },
+
+});
+
 Template.registerHelper('log', function(txt) {
   console.log(txt);
 });
 
 Template.registerHelper('count', function(find) {
-  console.log(find);
   if(!find) return 0;
   if(find.count) return find.count();
   if(typeof (find.length) !== "undefined") return find.length;

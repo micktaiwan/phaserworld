@@ -4,12 +4,11 @@
 
 <body>
 
-<div id="world"></div>
-
 <footer class="p-3">
 
   {{>titleEditor}}
   {{>tiles}}
+  {{>world}}
 
   <hr>
 
@@ -54,8 +53,12 @@
   <div id="tiles">
     <b class="lead">{{count files}} tiles</b><br>
     {{#each files}}
-      <img class="tile" src="{{link}}" width="64" height="64">
+      <img class="tile" src="{{link}}" width="64" height="64" draggable="true">
     {{/each}}
   </div>
 
+</template>
+
+<template name="world">
+  <div id="world"></div>
 </template>

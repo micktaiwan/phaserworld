@@ -1,25 +1,15 @@
 require('phaser');
 
-export class World {
+export class World extends Phaser.Game {
 
   constructor() {
+    super();
+    this.scene.add('Scene', new Scene(), true);
+    // this.scene.start('Scene')
+  }
 
-    const config = {
-      type: Phaser.AUTO,
-      parent: 'world',
-      height: $(window).innerHeight() - 500,
-      width: $(window).innerWidth(),
-      pixelArt: true,
-      physics: {
-        default: 'arcade',
-      },
-      scene: [Scene],
-    };
-
-    this.game = new Phaser.Game(config);
-
-    console.log('world constructed');
-
+  putTile() {
+    console.log('putTile', this.scene.scenes[0]);
   }
 
 }
@@ -27,7 +17,12 @@ export class World {
 class Scene extends Phaser.Scene {
 
   constructor() {
-    super();
+    super({
+      key: 'Scene',
+      physics: {
+        default: 'arcade',
+      },
+    });
     this.zoom = 2;
     this.setSpeed(200);
   }
@@ -38,10 +33,12 @@ class Scene extends Phaser.Scene {
   }
 
   preload() {
+    console.log('preload');
     this.load.spritesheet('player', 'img/perso1.png', {frameWidth: 16, frameHeight: 32});
   }
 
   create() {
+    console.log('create');
     this.cursors = this.input.keyboard.createCursorKeys();
     this.mouse = this.input.mouse;
     // console.log(this.cursors, this.mouse);
