@@ -44,7 +44,7 @@ class Scene extends Phaser.Scene {
   create() {
     this.cursors = this.input.keyboard.createCursorKeys();
     this.mouse = this.input.mouse;
-    console.log(this.cursors, this.mouse);
+    // console.log(this.cursors, this.mouse);
 
     this.cameras.main.setBounds(0, 0, 1024, 2048);
     this.cameras.main.setZoom(this.zoom);

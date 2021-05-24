@@ -24,3 +24,5 @@ blaze-hot                       # Update files using Blaze's API with HMR
 
 
 less
+ostrio:files
+random

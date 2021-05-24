@@ -43,5 +43,8 @@ Template.titleEditor.helpers({
 
 Template.titleEditor.events({
 
+  'click .saveToFile'() {
+    tileEditor.toFile();
+  },
 
 });
