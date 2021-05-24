@@ -13,6 +13,8 @@
 
 <template name="titleEditor">
 
+  <button class="btn btn-primary js-open-tile-editor">Tile Editor</button>
+
   <div id="editor">
     <div class="content">
       <div class="row">
@@ -40,7 +42,7 @@
   <div id="tiles">
     <b>{{count files}} tiles</b>
     {{#each files}}
-      <img src="{{link}}" width="32" height="32">
+      <img class="tile" src="{{link}}" width="64" height="64">
     {{/each}}
   </div>
 

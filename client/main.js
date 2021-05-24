@@ -39,6 +39,10 @@ Template.titleEditor.onRendered(function() {
 
 Template.titleEditor.events({
 
+  'click .js-open-tile-editor'() {
+    $('#editor').toggle();
+  },
+
   'click .saveToFile'() {
     tileEditor.toFile();
   },
@@ -54,7 +58,7 @@ Template.tiles.onCreated(function() {
 Template.tiles.helpers({
 
   files() {
-    return Files.find({}, {sort: {"meta.date": 1}}).each();
+    return Files.find({}, {sort: {"meta.date": -1}}).each();
   },
 
 });
