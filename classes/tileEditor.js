@@ -40,7 +40,7 @@ export class TileEditor {
   putPixel(x, y) {
     x = Math.floor(x / 20) * 20;
     y = Math.floor(y / 20) * 20;
-    this.ctx.strokeStyle = this.color;
+    this.ctx.fillStyle = this.color;
     this.ctx.fillRect(x, y, 19, 19);
   }
 

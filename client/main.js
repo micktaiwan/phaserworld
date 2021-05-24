@@ -40,6 +40,10 @@ Template.titleEditor.onRendered(function() {
   };
 
   world = new World(config);
+  this.subscribe('filesQuery', {}, function() {
+    world.startScene();
+  });
+
   tileEditor.setCanvasId("canvas", "result");
 
 });
@@ -60,14 +64,20 @@ Template.titleEditor.events({
 
 Template.tiles.onCreated(function() {
 
-  this.subscribe('filesQuery', {});
-
 });
 
 Template.tiles.helpers({
 
   files() {
     return Files.find({}, {sort: {"meta.date": -1}}).each();
+  },
+
+});
+
+Template.tiles.events({
+
+  'dragstart'(e) {
+    e.originalEvent.dataTransfer.setData("text", e.target.id);
   },
 
 });
@@ -86,7 +96,9 @@ Template.world.events({
 
   'drop #world': function(e) {
     $(e.currentTarget).removeClass('dragover');
-    world.putTile();
+    const fileId = e.originalEvent.dataTransfer.getData("text");
+    console.log(world);
+    world.scene.scenes[0].putTile(fileId);
   },
 
 });
