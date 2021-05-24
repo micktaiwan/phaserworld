@@ -1,4 +1,5 @@
 import {Files} from "../imports/api/tiles/collections.js";
+import {Meteor} from "meteor/meteor";
 
 export class TileEditor {
 
@@ -44,21 +45,26 @@ export class TileEditor {
   }
 
   toFile() {
+    const name = $('#tileName').val();
+    const userId = Meteor.userId();
+    console.log(userId);
+    if(!name) return alert('missing file name');
     this.canvas.toBlob(blob => {
-      console.log(blob);
-      blob.text().then(data => {
-        // console.log(data);
+      const file = new File([blob], name + '.png');
+      const upload = Files.insert({
+        file: file,
+        chunkSize: 'dynamic',
+        // streams: 'dynamic',
+        meta: {sourceId: 'tiles', userId: userId, date: new Date()},
+      }, false);
 
-        // const img = document.getElementById('img');
-        // const test = document.getElementById('test');
-        // const ctx = test.getContext('2d');
-        // ctx.drawImage(data, 0, 0);
-
-        // img.src = data;
-
-        Meteor.call('saveTile', data);
-
+      upload.on('end', function(error, fileObj) {
+        if(error) return console.log(`Error during upload: ${error}`);
+        console.log(`File "${fileObj.name}" successfully uploaded`);
       });
+
+      upload.start();
+
     }, 'image/png', 1);
   }
 

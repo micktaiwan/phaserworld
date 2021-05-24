@@ -8,6 +8,7 @@ import './main.html';
 
 import {World} from '../classes/world.js';
 import {TileEditor} from "../classes/tileEditor.js";
+import {Files} from "../imports/api/tiles/collections.js";
 
 const world = new World();
 const tileEditor = new TileEditor();
@@ -34,12 +35,7 @@ Template.titleEditor.onRendered(function() {
 
 });
 
-Template.titleEditor.helpers({
-  videos() {
-    return Videos.find({}, {sort: {date: -1}});
-  },
-
-});
+// Template.titleEditor.helpers({});
 
 Template.titleEditor.events({
 
@@ -47,4 +43,30 @@ Template.titleEditor.events({
     tileEditor.toFile();
   },
 
+});
+
+Template.tiles.onCreated(function() {
+
+  this.subscribe('filesQuery', {});
+
+});
+
+Template.tiles.helpers({
+
+  files() {
+    return Files.find({}, {sort: {"meta.date": 1}}).each();
+  },
+
+});
+
+Template.registerHelper('log', function(txt) {
+  console.log(txt);
+});
+
+Template.registerHelper('count', function(find) {
+  console.log(find);
+  if(!find) return 0;
+  if(find.count) return find.count();
+  if(typeof (find.length) !== "undefined") return find.length;
+  return find;
 });

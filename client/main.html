@@ -5,10 +5,8 @@
 <body>
 
 {{>titleEditor}}
+{{>tiles}}
 
-<div id="tiles">
-  Tiles
-</div>
 <div id="world"></div>
 
 </body>
@@ -27,13 +25,23 @@
         </div>
       </div>
       <canvas id="result" width="320" height="320"></canvas>
-      <canvas id="test" width="320" height="320"></canvas>
       <img id="img">
       <div class="buttons">
-        <input class="form-control" placeholder="Name">
+        <input id="tileName" class="form-control" placeholder="Name">
         <button class="btn btn-primary saveToFile">Save</button>
       </div>
     </div>
+  </div>
+
+</template>
+
+<template name="tiles">
+
+  <div id="tiles">
+    <b>{{count files}} tiles</b>
+    {{#each files}}
+      <img src="{{link}}" width="32" height="32">
+    {{/each}}
   </div>
 
 </template>
