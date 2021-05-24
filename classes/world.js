@@ -2,10 +2,12 @@ require('phaser');
 
 export class World extends Phaser.Game {
 
-  constructor() {
-    super();
+  constructor(config) {
+    super(config);
     this.scene.add('Scene', new Scene(), true);
     // this.scene.start('Scene')
+    console.log('world constructed');
+
   }
 
   putTile() {
@@ -20,8 +22,9 @@ class Scene extends Phaser.Scene {
     super({
       key: 'Scene',
       physics: {
-        default: 'arcade',
+        arcade:{},
       },
+
     });
     this.zoom = 2;
     this.setSpeed(200);

@@ -39,10 +39,6 @@ Template.titleEditor.onRendered(function() {
     pixelArt: true,
   };
 
-  this.game = new Phaser.Game(config);
-
-  console.log('world constructed');
-
   world = new World(config);
   tileEditor.setCanvasId("canvas", "result");
 
