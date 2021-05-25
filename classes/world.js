@@ -49,7 +49,7 @@ class Scene extends Phaser.Scene {
     Files.find().observe({
       added(f) {
         const file = Files.findOne(f._id);
-        console.log(f.name, file.link());
+        // console.log(f.name, file.link());
         self.load.image(f._id, file.link());
       },
     });
